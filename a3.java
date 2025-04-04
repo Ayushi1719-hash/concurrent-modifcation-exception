@@ -1,32 +1,38 @@
-import java.io.*;
+import java.util.Scanner;
 
-class GFG {
+public class FibonacciEvenSumCalculator {
 
-    // Method to check whether number is neon or not
-    public static boolean isNeonNumber(int n) {
-        int square = n * n;
+    // Computes Fibonacci series and sums the even-indexed values
+    static int computeEvenIndexSum(int N) {
+        if (N <= 0)
+            return 0;
+
+        int[] fib = new int[2 * N + 1];
+        fib[0] = 0;
+        fib[1] = 1;
+
         int sum = 0;
 
-        System.out.println("Calculating Neon status for number: " + n);
-        System.out.println("Square of the number: " + square);
+        System.out.print("🔢 Fibonacci Series: " + fib[0] + ", " + fib[1]);
+        for (int j = 2; j <= 2 * N; j++) {
+            fib[j] = fib[j - 1] + fib[j - 2];
+            System.out.print(", " + fib[j]);
 
-        while (square > 0) {
-            int r = square % 10;
-            sum += r;
-            square = square / 10;
+            if (j % 2 == 0) {
+                sum += fib[j];
+            }
         }
-
-        System.out.println("Sum of digits of the square: " + sum);
-        return sum == n;
+        System.out.println(); // Line break
+        return sum;
     }
 
+    // Driver code
     public static void main(String[] args) {
-        int n = 9;
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter value of N: ");
+        int N = scanner.nextInt();
 
-        if (isNeonNumber(n)) {
-            System.out.println(n + " is a Neon number ✔️");
-        } else {
-            System.out.println(n + " is not a Neon number ❌");
-        }
+        int result = computeEvenIndexSum(N);
+        System.out.println("✅ Sum of even-indexed Fibonacci numbers till 2N = " + (2 * N) + " is: " + result);
     }
 }
