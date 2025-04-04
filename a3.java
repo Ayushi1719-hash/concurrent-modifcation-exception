@@ -1,61 +1,41 @@
 import java.io.*;
  
-class GFG {
+class geeksforgeeks {
  
-    // Method to check whether number is neon or not
-    // Boolean type
-    public static boolean checkNeon(int n)
+    // Computing the value of first fibonacci series
+    // and storing the sum of even indexed numbers
+    static int Fib_Even_Sum(int N)
     {
-        // squaring the number to be checked
-        int square = n * n;
+        if (N <= 0)
+            return 0;
  
-        // Initializing current sum to 0
-        int sum = 0;
+        int fib[] = new int[2 * N + 1];
+        fib[0] = 0;
+        fib[1] = 1;
  
-        // If product is positive
-        while (square > 0) {
+        // Initializing the sum
+        int s = 0;
  
-            // Step 1: Find remainder
-            int r = square % 10;
+        // Adding remaining numbers
+        for (int j = 2; j <= 2 * N; j++) {
+            fib[j] = fib[j - 1] + fib[j - 2];
  
-            // Add remainder to the current sum
-            sum += r;
- 
-            // Drop last digit of the product
-            // and store the number
-            square = square / 10;
+            // Only considering even indexes
+            if (j % 2 == 0)
+                s += fib[j];
         }
  
-        // Condition check
-        // Sum of digits of number obtained is
-        // equal to original number
-        if (sum == n)
- 
-            // number is neon
-            return true;
-        else
- 
-            // number is not neon
-            return false;
+        return s;
     }
  
-    // Main driver method
+    // The Driver code
     public static void main(String[] args)
     {
-        // Custom input
-        int n = 9;
+        int N = 11;
  
-        // Calling above function to check custom number or
-        // if user entered number via Scanner class
-        if (checkNeon(n))
- 
-            // Print number considered is neon
-            System.out.println("Given number " + n
-                               + " is Neon number");
-        else
- 
-            // Print number considered is not neon
-            System.out.println("Given number " + n
-                               + " is not a Neon number");
+        // Prints the sum of even-indexed numbers
+        System.out.println(
+            "Even sum of fibonacci series till number " + N
+            + " is: " + +Fib_Even_Sum(N));
     }
 }
